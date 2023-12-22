@@ -26,7 +26,7 @@ class PineconeClient:
         
         # Setup pinecone index
         self.index = pinecone.GRPCIndex(index_name)
-        self.langchain_index = pinecone.Index(index_name)
+        self.vectorstore_index = pinecone.Index(index_name)
 
         # Setup text processor and embeddings engine
         self.text_processor = TextProcessor(
@@ -40,7 +40,7 @@ class PineconeClient:
 
         # Setup vectorstore
         self.vectorstore = Pinecone(
-            self.langchain_index,
+            self.vectorstore_index,
             self.embed.embed_query,
             'text'
         )
