@@ -23,16 +23,11 @@ pci = PineconeClient(
     embed_engine=HUGGING_FACE
 )
 
-# Pinecone index stats check
-db_stats = pci.get_index_stats()
-print(db_stats)
-
-
 # indexing
 if not pci.is_database_populated():
     pci.create_index(dataset)
 
-qa = setupLLM(pci.vectorstore)
+qa = setupLLM(model_name="llama2", context_source=pci.vectorstore)
 
 while True:
     query = input('Ask your Next.js Question here (type "exit" to quit): ')
